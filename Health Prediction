@@ -1,0 +1,35 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+ 
+dataset = pd.read_csv('Salary_Data.csv')
+dataset.head()
+from sklearn.preprocessing import OneHotEncoder
+
+#creating instance of one-hot-encoder
+encoder = OneHotEncoder(handle_unknown='ignore')
+
+encoder_df = pd.DataFrame(encoder.fit_transform(df[['Symptom_1']]).toarray())
+
+#merge one-hot encoded columns back with original DataFrame
+final_df = df.join(encoder_df)
+
+#view final df
+print(final_df)
+final_df.drop('team', axis=1, inplace=True)
+
+#view final df
+print(final_df)
+
+X = dataset.iloc[:,:-1].values  #independent variable array
+y = dataset.iloc[:,1].values 
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=1/3,random_state=0)
+
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(X_train,y_train)
+
+y_pred = regressor.predict(X_test) 
+y_pred
