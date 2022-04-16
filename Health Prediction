@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
  
 dataset = pd.read_csv('Salary_Data.csv')
 dataset.head()
+dataset = final_df
+final_df.head()
+
 from sklearn.preprocessing import OneHotEncoder
 
 #creating instance of one-hot-encoder
